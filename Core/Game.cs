@@ -1,4 +1,5 @@
-﻿using Trojan_MVP_v1.Utilities;
+﻿using Trojan_MVP_v1.Scenes;
+using Trojan_MVP_v1.Utilities;
 
 namespace Trojan_MVP_v1.Core
 {
@@ -23,6 +24,8 @@ namespace Trojan_MVP_v1.Core
             Console.Title = "Trojan_MVP_версия-1";
             Console.CursorVisible = false;
             Console.Clear();
+
+            GameState.CurrentScene = SceneManager.SceneWelcome;
         }
 
         private static void GameLoop()

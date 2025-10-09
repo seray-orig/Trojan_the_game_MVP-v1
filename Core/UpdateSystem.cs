@@ -7,7 +7,7 @@ namespace Trojan_MVP_v1.Core
         public static void Update()
         {
             // Обновляем игровые данные
-            InterfaceManager.InterfaceMain();
+            GameState.CurrentScene.Invoke();
         }
     }
 }
