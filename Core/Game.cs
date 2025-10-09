@@ -5,7 +5,7 @@ namespace Trojan_MVP_v1.Core
     public static class Game
     {
         private const int Tickrate = 30; // тиков в секунду
-        private static readonly int _frameTime = 1000 / Tickrate; // миллисекунд между тиками "кадрами"..
+        private static readonly int _frameTime = 1000 / Tickrate; // миллисекунд между тиками "кадрами"
 
         public static void Run()
         {
