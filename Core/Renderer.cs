@@ -17,12 +17,12 @@ namespace Trojan_MVP_v1.Core
             }*/
             Console.SetCursorPosition(0, 0);
             Console.Write(GameState.PlayerScreen.ToString());
-            GameState.PlayerCurrentScreenLenght = Console.CursorTop * GameState.ConsoleWidth + Console.CursorLeft;
+            GameState.PlayerCurrentScreenLength = Console.CursorTop * GameState.ConsoleWidth + Console.CursorLeft;
 
             // Дописываем пробелы, стирая остатки прошлого экрана (если текста было больше чем в этом рендере)
-            Console.Write( new string(_debugRenderSymbol, Math.Max(0, GameState.PlayerLastScreenLenght - GameState.PlayerCurrentScreenLenght)) );
+            Console.Write( new string(_debugRenderSymbol, Math.Max(0, GameState.PlayerLastScreenLength - GameState.PlayerCurrentScreenLength)) );
 
-            GameState.PlayerLastScreenLenght = GameState.PlayerCurrentScreenLenght;
+            GameState.PlayerLastScreenLength = GameState.PlayerCurrentScreenLength;
         }
 
         public static void Center(List<string> Text)
