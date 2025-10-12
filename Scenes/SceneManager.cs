@@ -11,14 +11,14 @@ namespace Trojan_MVP_v1.Scenes
     {
         public static void SceneWelcome()
         {
-            GameState.CurrentUI = "WelcomeScene";
+            //GameState.CurrentUI = "WelcomeScene"; // Похоже уже не нужно
             Renderer.Center(WelcomeScene.Text);
             InputHandler.CurrentKeyHandler = WelcomeScene.HotKeys;
         }
 
         public static void PlaceWork()
         {
-            GameState.CurrentUI = "PlaceWork";
+            //GameState.CurrentUI = "PlaceWork"; // Похоже уже не нужно
             Renderer.Center(Workplace.Text);
             InputHandler.CurrentKeyHandler = Workplace.HotKeys;
         }

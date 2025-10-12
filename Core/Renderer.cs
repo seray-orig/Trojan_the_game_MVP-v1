@@ -4,25 +4,37 @@ namespace Trojan_MVP_v1.Core
 {
     internal static class Renderer
     {
+
+        private static char _debugRenderSymbol = ' ';   // Любой символ за место пробела, если нужно что-то проверить
+        private static char _debugCenterSymbol = ' ';
+
         public static void Render()
         {
-            if (GameState.UIChanged)
+            /* if (GameState.UIChanged) // Похоже уже не нужно
             {
                 Console.Clear();
                 GameState.PreviousUI = GameState.CurrentUI;
-            }
+            }*/
             Console.SetCursorPosition(0, 0);
             Console.Write(GameState.PlayerScreen.ToString());
+            GameState.PlayerCurrentScreenLenght = Console.CursorTop * GameState.ConsoleWidth + Console.CursorLeft;
+
+            // Дописываем пробелы, стирая остатки прошлого экрана (если текста было больше чем в этом рендере)
+            Console.Write( new string(_debugRenderSymbol, Math.Max(0, GameState.PlayerLastScreenLenght - GameState.PlayerCurrentScreenLenght)) );
+
+            GameState.PlayerLastScreenLenght = GameState.PlayerCurrentScreenLenght;
         }
 
         public static void Center(List<string> Text)
         {
             GameState.PlayerScreen.Clear();
-            GameState.PlayerScreen.Append('\n', (GameState.ConsoleHeight / 2) - Text.Count);
+            GameState.PlayerScreen.Append(_debugCenterSymbol, ((GameState.ConsoleHeight / 2) - (Text.Count / 2 + 1)) * GameState.ConsoleWidth);
             foreach (var line in Text)
             {
-                GameState.PlayerScreen.Append(' ', (GameState.ConsoleWidth / 2) - (line.Length / 2));
-                GameState.PlayerScreen.Append(line+'\n');
+                GameState.PlayerScreen.Append(_debugCenterSymbol, (GameState.ConsoleWidth / 2) - (line.Length / 2));
+                GameState.PlayerScreen.Append(line);
+                // Выглядит фигово, как буд-то можно упростить или типа того
+                GameState.PlayerScreen.Append(_debugCenterSymbol, GameState.ConsoleWidth - ( (GameState.ConsoleWidth / 2) - (line.Length / 2) + line.Length));
             }
         }
     }
