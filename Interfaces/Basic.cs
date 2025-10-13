@@ -8,12 +8,11 @@ using Trojan_MVP_v1.Core;
 
 namespace Trojan_MVP_v1.Interfaces
 {
-    internal static class MainInterface
+    internal static class Basic
     {
         public static List<string> Text = new List<string>()
         {
-            "Esc - Закрыть игру",
-            "E - Открыть инструкцию"
+            "E - Открыть инструкцию",
         };
 
         public static void HotKeys(ConsoleKey key)

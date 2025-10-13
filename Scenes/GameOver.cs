@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trojan_MVP_v1.Scenes
 {
-    internal class GameOverScene
+    internal class GameOver
     {
     }
 }

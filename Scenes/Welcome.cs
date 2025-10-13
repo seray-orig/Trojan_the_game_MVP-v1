@@ -2,7 +2,7 @@
 
 namespace Trojan_MVP_v1.Scenes
 {
-    internal static class WelcomeScene
+    internal static class Welcome
     {
         private static byte page = 1;
 
@@ -10,15 +10,15 @@ namespace Trojan_MVP_v1.Scenes
         {
             {1, new List<string>()
                 {
-                    "Добро пожаловать",
-                    "",
-                    "Это минимально жизнеспособный продукт (MVP) основной игры Trojan",
-                    "Прототип создан что бы посмотреть на основные механики со стороны",
-                    "после прохождения обязательно оставьте отзыв где-нибудь",
-                    "без отклика это не имеет смысла",
-                    "",
-                    "1/2",
-                    "Enter"
+                "Добро пожаловать",
+                "",
+                "Это минимально жизнеспособный продукт (MVP) основной игры Trojan",
+                "Прототип создан что бы посмотреть на основные механики со стороны",
+                "после прохождения обязательно оставьте отзыв где-нибудь",
+                "без отклика это не имеет смысла",
+                "",
+                "1/2",
+                "Enter"
                 }
             },
 
@@ -46,7 +46,7 @@ namespace Trojan_MVP_v1.Scenes
                     if (page != pages.Count)
                         Text = pages[++page];
                     else
-                        GameState.CurrentScene = SceneManager.PlaceWork;
+                        UpdateSystem.NextScene();
                     break;
             }
         }

@@ -10,13 +10,6 @@
             while (Console.KeyAvailable)
             {
                 ConsoleKey key = Console.ReadKey(intercept: true).Key;
-
-                if (key == ConsoleKey.Escape)
-                {
-                    Game.Shutdown();
-                    break;
-                }
-
                 CurrentKeyHandler?.Invoke(key);
             }
         }

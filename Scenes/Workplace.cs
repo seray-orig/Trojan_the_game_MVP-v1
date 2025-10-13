@@ -11,17 +11,7 @@ namespace Trojan_MVP_v1.Scenes
     {
         public static List<string> Text = new List<string>()
         {
-            "Алё"
+            //GameState.PlayerInterface.ToString(),
         };
-
-        public static void HotKeys(ConsoleKey key)
-        {
-            switch (key)
-            {
-                case ConsoleKey.E:
-                    Game.Shutdown();
-                    break;
-            }
-        }
     }
 }
