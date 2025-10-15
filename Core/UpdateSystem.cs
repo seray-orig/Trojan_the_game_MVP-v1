@@ -47,7 +47,7 @@ namespace Trojan_MVP_v1.Core
 
         private static List<string> SceneOrder = new List<string>
         {
-            "Welcome",
+            //"Welcome",
             "Workplace",
             "GameOver"
         };
@@ -102,7 +102,7 @@ namespace Trojan_MVP_v1.Core
         private static void UpdateErrors()
         {
             ErrorFactory.CheckError();
-            Renderer.BuildError(ErrorFactory.Error);
+            Renderer.BuildError(ErrorFactory.Error.ToString());
         }
     }
 }

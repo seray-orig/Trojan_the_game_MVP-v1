@@ -6,8 +6,8 @@ namespace Trojan_MVP_v1.Core
     internal static class Renderer
     {
 
-        private static char _debugRenderSymbol = ' ';   // Любой символ за место пробела, если нужно что-то проверить
-        private static char _debugInternalSymbol = ' ';
+        private static char _debugRenderSymbol = '/';   // Любой символ за место пробела, если нужно что-то проверить
+        private static char _debugInternalSymbol = '.';
 
         public static void Render()
         {
@@ -35,7 +35,7 @@ namespace Trojan_MVP_v1.Core
         public static void BuildInterface(List<string> Text)
         {
             GameState.PlayerScreen.Clear();
-            GameState.PlayerScreen.Append(EmptyString(0));
+            EmptyString();
             int xPos = 0;
             int yPos = 0;
             int padding = 3; // расстояние между элементами
@@ -45,7 +45,7 @@ namespace Trojan_MVP_v1.Core
                 // Если элемент не помещается на текущую строку — перенос
                 if (xPos + hotkey.Length > GameState.ConsoleWidth)
                 {
-                    GameState.PlayerScreen.Append(EmptyString(xPos));
+                    EmptyString();
                     yPos++; xPos = 0;
                 }
 
@@ -62,22 +62,19 @@ namespace Trojan_MVP_v1.Core
             }
 
             // Разделительная линия под интерфейсом
-            GameState.PlayerScreen.Append(EmptyString(xPos));
+            EmptyString();
             GameState.PlayerScreen.Append(new string('_', GameState.ConsoleWidth));
         }
 
-        public static void BuildError(List<string> Text)
+        public static void BuildError(string Text)
         {
-            GameState.PlayerScreen.Append(Text[0]);
+            GameState.PlayerScreen.Append(Text);
         }
 
         // Возвращает остаточное заполнение до конца строки
-        private static string EmptyString(int count)
+        private static void EmptyString()
         {
-            if (count > 0)
-                return new string(_debugInternalSymbol, GameState.ConsoleWidth - count);
-            else
-                return new string(_debugInternalSymbol, GameState.ConsoleWidth);
+            GameState.PlayerScreen.Append( new string(_debugInternalSymbol, (GameState.PlayerScreen.Length % GameState.ConsoleWidth)) );
         }
     }
 }
