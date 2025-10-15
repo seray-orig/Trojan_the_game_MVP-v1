@@ -12,7 +12,7 @@ namespace Trojan_MVP_v1.Interfaces
     {
         public static List<string> Text = new List<string>()
         {
-            "E - Открыть инструкцию",
+            "E - Открыть руководство",
         };
 
         public static void HotKeys(ConsoleKey key)
@@ -20,7 +20,7 @@ namespace Trojan_MVP_v1.Interfaces
             switch (key)
             {
                 case ConsoleKey.E:
-                    Console.WriteLine("Двигаемся вверх!");
+                    UpdateSystem.SetInterface("Manual");
                     break;
             }
         }

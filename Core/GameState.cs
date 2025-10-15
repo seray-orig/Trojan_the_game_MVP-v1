@@ -13,6 +13,5 @@ namespace Trojan_MVP_v1.Core
         public static StringBuilder PlayerScreen = new StringBuilder(cmdPixels);
         public static int           PlayerCurrentScreenLength = 0;
         public static int           PlayerLastScreenLength = 0;
-        //public static StringBuilder PlayerInterface = new StringBuilder(cmdPixels);
     }
 }

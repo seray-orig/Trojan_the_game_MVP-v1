@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Trojan_MVP_v1.Entities;
 using Trojan_MVP_v1.Interfaces;
 using Trojan_MVP_v1.Scenes;
 
@@ -32,6 +33,7 @@ namespace Trojan_MVP_v1.Core
                 () =>
                 {
                     UpdateInterface();
+                    UpdateErrors();
                 }
             },
             {
@@ -90,6 +92,17 @@ namespace Trojan_MVP_v1.Core
         private static void UpdateInterface()
         {
             Interfaces[CurrentInterface.ToString()].Invoke();
+        }
+
+        ////////////////////////////////////////////////////////
+        //                                                    //
+        //                       Ошибки                       //
+        //                                                    //
+        ////////////////////////////////////////////////////////
+        private static void UpdateErrors()
+        {
+            ErrorFactory.CheckError();
+            Renderer.BuildError(ErrorFactory.Error);
         }
     }
 }
