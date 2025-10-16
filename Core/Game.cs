@@ -1,5 +1,4 @@
-﻿using Trojan_MVP_v1.Scenes;
-using Trojan_MVP_v1.Utilities;
+﻿using Trojan_MVP_v1.InternalUtilities;
 
 namespace Trojan_MVP_v1.Core
 {

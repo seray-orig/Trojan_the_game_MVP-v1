@@ -13,7 +13,7 @@ namespace Trojan_MVP_v1.Enemy
 
         public static int ErrorCode = 0;
 
-        private static int DifficultyLimiter = 0;   // 50+ Переход в Хард мод, 100+ финальная босс ошибка и победа
+        public static int DifficultyLimiter = 0;   // 50+ Переход в Хард мод, 100+ финальная босс ошибка и победа
         private static int spawnrate = 40;
         // Заскриптованные ошибки, которые обязаны вызваться на определённом этапе
         private static bool ErrorOne = true;
@@ -125,13 +125,13 @@ namespace Trojan_MVP_v1.Enemy
                     if (ErrorFive)
                         ErrorCode = 5;
                 }
-                else if (DifficultyLimiter >= 40)
+                else if (DifficultyLimiter >= 30)
                 {
                     ErrorList.Add(4);
                     if (ErrorFour)
                         ErrorCode = 4;
                 }
-                else if (DifficultyLimiter > 25)
+                else if (DifficultyLimiter > 20)
                     ErrorList.Add(3);
                 else if (DifficultyLimiter > 10)
                     ErrorList.Add(2);
@@ -169,7 +169,7 @@ namespace Trojan_MVP_v1.Enemy
             }
 
             Error.Clear();
-            Error.Append("Ошибок не обнаружено " + spinnerChar[spinnerIndex]);
+            Error.Append("Ошибок не обнаружено " + spinnerChar[spinnerIndex] + " " + DifficultyLimiter);
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace Trojan_MVP_v1.Utilities
+namespace Trojan_MVP_v1.InternalUtilities
 {
 
     public static class ConsoleAPI
