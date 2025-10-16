@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Trojan_MVP_v1.Entities;
+using Trojan_MVP_v1.Enemy;
 using Trojan_MVP_v1.Interfaces;
 using Trojan_MVP_v1.Scenes;
 
@@ -33,7 +33,8 @@ namespace Trojan_MVP_v1.Core
                 () =>
                 {
                     UpdateInterface();
-                    UpdateErrors();
+                    UpdateError();
+                    UpdateUtility();
                 }
             },
             {
@@ -87,6 +88,14 @@ namespace Trojan_MVP_v1.Core
                     InputHandler.CurrentKeyHandler = Manual.HotKeys;
                 }
             },
+            {
+                "Utilities",
+                () =>
+                {
+                    Renderer.BuildUtility();
+                    InputHandler.CurrentKeyHandler = Utilities.HotKeys;
+                }
+            },
         };
 
         private static StringBuilder CurrentInterface = new StringBuilder("Basic");
@@ -107,11 +116,21 @@ namespace Trojan_MVP_v1.Core
         //                       Ошибки                       //
         //                                                    //
         ////////////////////////////////////////////////////////
-        private static void UpdateErrors()
+        private static void UpdateError()
         {
             ErrorFactory.CheckError();
             if (CurrentInterface.ToString() == "Basic")
                 Renderer.BuildError(new List<string>() { ErrorFactory.Error.ToString(), ErrorFactory.ErrorTime.ToString() });
+        }
+
+        ////////////////////////////////////////////////////////
+        //                                                    //
+        //                      Утилиты                       //
+        //                                                    //
+        ////////////////////////////////////////////////////////
+        private static void UpdateUtility()
+        {
+
         }
     }
 }

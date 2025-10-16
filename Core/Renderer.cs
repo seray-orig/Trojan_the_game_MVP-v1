@@ -75,9 +75,6 @@ namespace Trojan_MVP_v1.Core
             GameState.PlayerScreen.Append( new string(_debugInternalSymbol, 3) + Title);
             CompleteTheString();
 
-            for (int i = 0; i < 3; i++)
-                CompleteTheString();
-
             foreach (var line in Text)
             {
                 GameState.PlayerScreen.Append( new string(_debugInternalSymbol, 3) + line );
@@ -95,6 +92,11 @@ namespace Trojan_MVP_v1.Core
                 GameState.PlayerScreen.Append(line);
                 CompleteTheString();
             }
+        }
+
+        public static void BuildUtility()
+        {
+
         }
 
         // Завершает строку пустотой

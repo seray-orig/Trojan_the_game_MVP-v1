@@ -2,7 +2,7 @@
 using System.Text;
 using Trojan_MVP_v1.Core;
 
-namespace Trojan_MVP_v1.Entities
+namespace Trojan_MVP_v1.Enemy
 {
     public static class ErrorFactory
     {
@@ -16,6 +16,7 @@ namespace Trojan_MVP_v1.Entities
         private static int DifficultyLimiter = 0;   // 50+ Переход в Хард мод, 100+ финальная босс ошибка и победа
         private static int spawnrate = 40;
         // Заскриптованные ошибки, которые обязаны вызваться на определённом этапе
+        private static bool ErrorOne = true;
         private static bool ErrorFour = true;
         private static bool ErrorFive = true;
         private static bool ErrorTen = true;
@@ -33,7 +34,15 @@ namespace Trojan_MVP_v1.Entities
             
             if (_end.Seconds >= spawnrate)
             {
-                if (DifficultyLimiter >= 40 && ErrorFour && !GameState.IsErrorRun)
+                DifficultyLimiter++;
+
+                if (DifficultyLimiter >= 10 && ErrorOne && !GameState.IsErrorRun)
+                {
+                    ErrorRun();
+                    GameState.IsErrorRun = true;
+                    ErrorOne = false;
+                }
+                else if (DifficultyLimiter >= 40 && ErrorFour && !GameState.IsErrorRun)
                 {
                     ErrorRun();
                     GameState.IsErrorRun = true;
@@ -51,13 +60,12 @@ namespace Trojan_MVP_v1.Entities
                     GameState.IsErrorRun = true;
                     ErrorTen = false;
                 }
-                else if (Random.Shared.Next(100) >= 65 && !GameState.IsErrorRun)
+                else if (Random.Shared.Next(100) >= 60 && !GameState.IsErrorRun)    // Вероятность выпадения ошибки 40%
                 {
                     ErrorRun();
                     GameState.IsErrorRun = true;
                 }
-                spawnrate = 40 - Random.Shared.Next(40);
-                DifficultyLimiter += 2;
+                spawnrate = 25 - Random.Shared.Next(15);
                 _start = DateTime.Now;
             }
         }
@@ -67,10 +75,19 @@ namespace Trojan_MVP_v1.Entities
             ErrorLogic();
         }
 
+        // Здесь задаётся время даваемое для исправления ошибки соответственно её коду
         private static Dictionary<int, TimeSpan> ErrorProperties = new Dictionary<int, TimeSpan>()
         {
             { 1, new TimeSpan(0, 2, 0) },
-
+            { 2, new TimeSpan(0, 0, 40) },
+            { 3, new TimeSpan(0, 1, 20) },
+            { 4, new TimeSpan(0, 2, 30) },
+            { 5, new TimeSpan(0, 5, 0) },
+            { 6, new TimeSpan(0, 1, 30) },
+            { 7, new TimeSpan(0, 7, 0) },
+            { 8, new TimeSpan(0, 0, 20) },
+            { 9, new TimeSpan(0, 2, 30) },
+            { 10, new TimeSpan(0, 10, 0) },
         };
 
         private static void ErrorRun()
@@ -92,7 +109,7 @@ namespace Trojan_MVP_v1.Entities
             {
                 if (DifficultyLimiter >= 100)
                 {
-                    
+
                 }
                 else if (DifficultyLimiter > 85)
                     ErrorList.Add(9);
@@ -119,7 +136,11 @@ namespace Trojan_MVP_v1.Entities
                 else if (DifficultyLimiter > 10)
                     ErrorList.Add(2);
                 else if (DifficultyLimiter <= 10)
+                {
                     ErrorList.Add(1);
+                    if (ErrorOne)
+                        ErrorCode = 1;
+                }
 
                 if (ErrorCode == 0)
                 {
