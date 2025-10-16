@@ -40,7 +40,7 @@ namespace Trojan_MVP_v1.Core
                 "GameOver",
                 () =>
                 {
-                    
+                    Renderer.Center(GameOver.Text);
                 }
             }
         };
@@ -75,10 +75,18 @@ namespace Trojan_MVP_v1.Core
                 "Basic",
                 () =>
                 {
-                    Renderer.BuildInterface(Basic.Text);
+                    Renderer.BuildBasic(Basic.Text);
                     InputHandler.CurrentKeyHandler = Basic.HotKeys;
                 }
-            }
+            },
+            {
+                "Manual",
+                () =>
+                {
+                    Renderer.BuildManual(Manual.BuildTitle(), Manual.Text);
+                    InputHandler.CurrentKeyHandler = Manual.HotKeys;
+                }
+            },
         };
 
         private static StringBuilder CurrentInterface = new StringBuilder("Basic");
@@ -102,7 +110,8 @@ namespace Trojan_MVP_v1.Core
         private static void UpdateErrors()
         {
             ErrorFactory.CheckError();
-            Renderer.BuildError(ErrorFactory.Error.ToString());
+            if (CurrentInterface.ToString() == "Basic")
+                Renderer.BuildError(new List<string>() { ErrorFactory.Error.ToString(), ErrorFactory.ErrorTime.ToString() });
         }
     }
 }

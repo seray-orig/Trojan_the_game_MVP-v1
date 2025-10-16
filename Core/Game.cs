@@ -13,9 +13,6 @@ namespace Trojan_MVP_v1.Core
             Initialize();
 
             GameLoop();
-
-            Console.Clear();
-            Console.WriteLine("Игра окончена.");
         }
 
         private static void Initialize()

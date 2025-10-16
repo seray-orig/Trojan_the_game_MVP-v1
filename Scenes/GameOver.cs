@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Trojan_MVP_v1.Core;
 
 namespace Trojan_MVP_v1.Scenes
 {
-    internal class GameOver
+    internal static class GameOver
     {
+        static GameOver()
+        {
+            if (GameState.PlayerWin)
+            {
+                Text.Add("Вы спасли компанию, лучший работник!");
+                Text.Add("(победа, спасибо за игру)");
+            }
+            else
+            {
+                Text.Add("Компания уничтожена из-за ужасной архитектуры");
+                Text.Add("(поражение)");
+            }
+        }
+
+        public static List<string> Text = new List<string>();
     }
 }

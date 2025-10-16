@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trojan_MVP_v1.Tools
+namespace Trojan_MVP_v1.Interfaces
 {
     internal class Utilities
     {
