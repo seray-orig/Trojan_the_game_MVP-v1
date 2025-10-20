@@ -34,7 +34,7 @@ namespace Trojan_MVP_v1.Enemy
             
             if (_end.Seconds >= spawnrate)
             {
-                DifficultyLimiter++;
+                DifficultyLimiter+=2;
 
                 if (DifficultyLimiter >= 10 && ErrorOne && !GameState.IsErrorRun)
                 {

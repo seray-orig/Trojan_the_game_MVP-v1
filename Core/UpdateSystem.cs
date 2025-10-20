@@ -2,6 +2,7 @@
 using Trojan_MVP_v1.Enemy;
 using Trojan_MVP_v1.Interfaces;
 using Trojan_MVP_v1.Scenes;
+using Trojan_MVP_v1.Weapons;
 
 namespace Trojan_MVP_v1.Core
 {
@@ -92,7 +93,7 @@ namespace Trojan_MVP_v1.Core
                 "Utilities",
                 () =>
                 {
-                    Renderer.BuildUtility();
+                    Renderer.BuildUtilitiesInterface(Utilities.BuildTitle(), Utilities.Text);
                     InputHandler.CurrentKeyHandler = Utilities.HotKeys;
                 }
             },
@@ -130,7 +131,10 @@ namespace Trojan_MVP_v1.Core
         ////////////////////////////////////////////////////////
         private static void UpdateUtility()
         {
-
+            if (GameState.CurrentUtility != null)
+                GameState.CurrentUtility.Invoke();
+            if (CurrentInterface.ToString() == "Basic" && GameState.IsUtilityRun)
+                Renderer.BuildUtility();
         }
     }
 }

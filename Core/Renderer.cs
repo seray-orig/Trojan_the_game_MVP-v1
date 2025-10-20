@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Design;
+using System.Globalization;
 using System.Text;
 
 namespace Trojan_MVP_v1.Core
@@ -94,13 +95,58 @@ namespace Trojan_MVP_v1.Core
             }
         }
 
+        public static void BuildUtilitiesInterface(string Title, List<string> Text)
+        {
+            GameState.PlayerScreen.Clear();
+            CompleteTheString();
+
+            GameState.PlayerScreen.Append(new string(_debugInternalSymbol, 3) + Title);
+            CompleteTheString();
+
+            var content = new List<string>() {""};
+            var i = 0;
+            foreach (var line in Text)
+            {
+                if (content[i].Length + line.Length + 3 + 10 < GameState.ConsoleWidth)
+                {
+                    content[i] += line + new string(_debugInternalSymbol, 3);
+                }
+                else
+                {
+                    i++;
+                    content.Add("");
+                    content[i] += line + new string(_debugInternalSymbol, 3);
+                }
+            }
+
+            GameState.PlayerScreen.Append(_debugInternalSymbol, ((GameState.ConsoleHeight / 2) - (content.Count / 2 + 3)) * GameState.ConsoleWidth);
+
+            foreach (var line in content)
+            {
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 10);
+                GameState.PlayerScreen.Append(line);
+                CompleteTheString();
+            }
+        }
+
         public static void BuildUtility()
         {
+            GameState.PlayerScreen.Append(_debugInternalSymbol, (GameState.ConsoleHeight - 12 -
+                (GameState.PlayerScreen.Length / GameState.ConsoleWidth)) * GameState.ConsoleWidth);
+            GameState.PlayerScreen.Append(new string('_', GameState.ConsoleWidth));
+            CompleteTheString();
 
+            GameState.PlayerScreen.Append(new string(_debugInternalSymbol, 3) + GameState.CurrentUtilityTitle);
+            CompleteTheString();
+
+            GameState.PlayerScreen.Append(_debugInternalSymbol, ( (GameState.ConsoleHeight - 2 -
+                GameState.PlayerScreen.Length / GameState.ConsoleWidth) / 2 ) * GameState.ConsoleWidth);
+            GameState.PlayerScreen.Append(_debugInternalSymbol, GameState.ConsoleWidth / 2 - GameState.CurrentUtilityText.Length / 2);
+            GameState.PlayerScreen.Append(GameState.CurrentUtilityText);
         }
 
         // Завершает строку пустотой
-        private static void CompleteTheString()
+        public static void CompleteTheString()
         {
             GameState.PlayerScreen.Append( new string(_debugInternalSymbol, GameState.ConsoleWidth - (GameState.PlayerScreen.Length % GameState.ConsoleWidth)) );
         }
