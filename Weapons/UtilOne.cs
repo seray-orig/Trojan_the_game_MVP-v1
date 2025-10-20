@@ -24,7 +24,7 @@ namespace Trojan_MVP_v1.Weapons
             GameState.CurrentUtilityTitle.Append(Title);
             GameState.IsUtilityRun = true;
 
-            if (_end.Seconds < 5 && !_solve)
+            if (_end.Seconds < 5)
             {
                 GameState.CurrentUtilityText.Clear();
                 GameState.CurrentUtilityText.Append("Проверка наличия рядовых критических ошибок.");
@@ -42,20 +42,20 @@ namespace Trojan_MVP_v1.Weapons
                 GameState.CurrentUtility = null;
             }
 
-            if (_canStart && ErrorFactory.ErrorCode == 1 && GameState.IsErrorRun)
+            if (_solve || (_canStart && ErrorFactory.ErrorCode == 1 && GameState.IsErrorRun))
             {
+                if (!_solve)
+                {
+                    GameState.IsErrorRun = false;
+                    ErrorFactory.ErrorTime.Clear();
+                    ErrorFactory.DifficultyLimiter += 3;
+                }
+
                 GameState.CurrentUtilityText.Clear();
                 GameState.CurrentUtilityText.Append("Исправлено.");
-                idkHowElseToImplementThis = true;
                 _solve = true;
             }
-            else if (_solve && _end.Seconds < 10)
-            {
-                GameState.IsErrorRun = false;
-                ErrorFactory.ErrorTime.Clear();
-                ErrorFactory.DifficultyLimiter += 3;
-            }
-            else if (!_solve && _canStart)
+            else if (_canStart)
             {
                 GameState.CurrentUtilityText.Clear();
                 GameState.CurrentUtilityText.Append("Не обнаружено.");
