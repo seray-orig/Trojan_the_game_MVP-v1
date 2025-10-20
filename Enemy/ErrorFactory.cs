@@ -28,13 +28,16 @@ namespace Trojan_MVP_v1.Enemy
             _end = DateTime.Now - _start;
 
             if (GameState.IsErrorRun)
+            {
+                _start = DateTime.Now;
                 ErrorRun();
+            }
             else
                 NoErrors();
             
-            if (_end.Seconds >= spawnrate)
+            if (_end.Seconds >= spawnrate && !GameState.IsErrorRun)
             {
-                DifficultyLimiter+=2;
+                //DifficultyLimiter+=2;
 
                 if (DifficultyLimiter >= 10 && ErrorOne && !GameState.IsErrorRun)
                 {
@@ -60,12 +63,12 @@ namespace Trojan_MVP_v1.Enemy
                     GameState.IsErrorRun = true;
                     ErrorTen = false;
                 }
-                else if (Random.Shared.Next(100) >= 60 && !GameState.IsErrorRun)    // Вероятность выпадения ошибки 40%
+                else if (Random.Shared.Next(2) != 0 && !GameState.IsErrorRun)    // Вероятность выпадения ошибки 50%
                 {
                     ErrorRun();
                     GameState.IsErrorRun = true;
                 }
-                spawnrate = 25 - Random.Shared.Next(15);
+                spawnrate = 30 - Random.Shared.Next(15);
                 _start = DateTime.Now;
             }
         }

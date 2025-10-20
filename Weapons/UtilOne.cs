@@ -49,7 +49,7 @@ namespace Trojan_MVP_v1.Weapons
                 {
                     GameState.IsErrorRun = false;
                     ErrorFactory.ErrorTime.Clear();
-                    ErrorFactory.DifficultyLimiter += 2;
+                    ErrorFactory.DifficultyLimiter += 5;
                 }
 
                 GameState.CurrentUtilityText.Clear();
