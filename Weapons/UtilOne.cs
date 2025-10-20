@@ -37,6 +37,7 @@ namespace Trojan_MVP_v1.Weapons
             else
             {
                 _canStart = false;
+                _solve = false;
                 idkHowElseToImplementThis = false;
                 GameState.IsUtilityRun = false;
                 GameState.CurrentUtility = null;
@@ -48,7 +49,7 @@ namespace Trojan_MVP_v1.Weapons
                 {
                     GameState.IsErrorRun = false;
                     ErrorFactory.ErrorTime.Clear();
-                    ErrorFactory.DifficultyLimiter += 3;
+                    ErrorFactory.DifficultyLimiter += 2;
                 }
 
                 GameState.CurrentUtilityText.Clear();
