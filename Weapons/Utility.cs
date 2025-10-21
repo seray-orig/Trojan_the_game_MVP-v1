@@ -3,9 +3,10 @@ using Trojan_MVP_v1.Enemy;
 
 namespace Trojan_MVP_v1.Weapons
 {
-    internal static class UtilOne
+    internal static class Utility
     {
-        private static string Title = "Утилита 1";
+        public static int UtilityCode;
+        private static string Title;
         private static DateTime _start;
         private static TimeSpan _end;
         private static bool idkHowElseToImplementThis = false;
@@ -14,6 +15,8 @@ namespace Trojan_MVP_v1.Weapons
 
         public static void Run()
         {
+            Title = "Утилита " + UtilityCode;
+
             if (!idkHowElseToImplementThis)
             {
                 _start = DateTime.Now;
@@ -27,7 +30,7 @@ namespace Trojan_MVP_v1.Weapons
             if (_end.Seconds < 5)
             {
                 GameState.CurrentUtilityText.Clear();
-                GameState.CurrentUtilityText.Append("Проверка наличия рядовых критических ошибок.");
+                GameState.CurrentUtilityText.Append("Проверка наличия критических ошибок.");
             }
             else if (!_canStart)
             {
@@ -43,13 +46,11 @@ namespace Trojan_MVP_v1.Weapons
                 GameState.CurrentUtility = null;
             }
 
-            if (_solve || (_canStart && ErrorFactory.ErrorCode == 1 && GameState.IsErrorRun))
+            if (_solve || (_canStart && ErrorFactory.ErrorCode == UtilityCode && GameState.IsErrorRun))
             {
                 if (!_solve)
                 {
-                    GameState.IsErrorRun = false;
-                    ErrorFactory.ErrorTime.Clear();
-                    ErrorFactory.DifficultyLimiter += 5;
+                    ErrorFactory.ErrorSolve();
                 }
 
                 GameState.CurrentUtilityText.Clear();

@@ -23,8 +23,6 @@ namespace Trojan_MVP_v1.Interfaces
             "S - Утилита 2,",
             "D - Утилита 3,",
             "F - Утилита 4,",
-            "G - Утилита 5,",
-            "H - Утилита 6,",
 
         };
 
@@ -37,7 +35,35 @@ namespace Trojan_MVP_v1.Interfaces
                     break;
                 case ConsoleKey.A:
                     UpdateSystem.SetInterface("Basic");
-                    GameState.CurrentUtility = UtilOne.Run;
+                    if (!GameState.IsUtilityRun)
+                    {
+                        Utility.UtilityCode = 1;
+                        GameState.CurrentUtility = Utility.Run;
+                    }
+                    break;
+                case ConsoleKey.S:
+                    UpdateSystem.SetInterface("Basic");
+                    if (!GameState.IsUtilityRun)
+                    {
+                        Utility.UtilityCode = 2;
+                        GameState.CurrentUtility = Utility.Run;
+                    }
+                    break;
+                case ConsoleKey.D:
+                    UpdateSystem.SetInterface("Basic");
+                    if (!GameState.IsUtilityRun)
+                    {
+                        Utility.UtilityCode = 3;
+                        GameState.CurrentUtility = Utility.Run;
+                    }
+                    break;
+                case ConsoleKey.F:
+                    UpdateSystem.SetInterface("Basic");
+                    if (!GameState.IsUtilityRun)
+                    {
+                        Utility.UtilityCode = 4;
+                        GameState.CurrentUtility = Utility.Run;
+                    }
                     break;
             }
         }

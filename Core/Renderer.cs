@@ -85,6 +85,11 @@ namespace Trojan_MVP_v1.Core
 
         public static void BuildError(List<string> Text)
         {
+            CompleteTheString();
+            GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+            GameState.PlayerScreen.Append("Проблем было исправлено сегодня: " + GameState.ErrorsWereSolved);
+            CompleteTheString();
+
             GameState.PlayerScreen.Append(_debugInternalSymbol, (GameState.ConsoleHeight / 2 - 
                 (GameState.PlayerScreen.Length / GameState.ConsoleWidth)) * GameState.ConsoleWidth);
             foreach (var line in Text)
