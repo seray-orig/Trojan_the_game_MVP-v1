@@ -22,7 +22,6 @@ namespace Trojan_MVP_v1.Core
         public static bool PlayerWin = false;
 
         public static Action        CurrentUtility;
-        public static List<bool> UtilityHistory = new List<bool>(3) { false, false, false };
         public static StringBuilder CurrentUtilityTitle = new StringBuilder();
         public static StringBuilder CurrentUtilityText = new StringBuilder(cmdPixels/2);
         public static bool          IsUtilityRun = false;

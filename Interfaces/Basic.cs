@@ -23,8 +23,8 @@ namespace Trojan_MVP_v1.Interfaces
                     UpdateSystem.SetInterface("Manual");
                     break;
                 case ConsoleKey.U:
-                    if (!Text.Contains("U - Открыть раздел утилит"))
-                        Text.Add("U - Открыть раздел утилит");
+                    if (!Text.Contains("U - Выбрать утилиту"))
+                        Text.Add("U - Выбрать утилиту");
                     UpdateSystem.SetInterface("Utilities");
                     break;
             }

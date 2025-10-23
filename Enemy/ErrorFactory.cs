@@ -12,10 +12,10 @@ namespace Trojan_MVP_v1.Enemy
         public static StringBuilder ErrorTime = new StringBuilder();
 
         public static int ErrorCode = 0;
-        private static TimeSpan spawnrate = new TimeSpan(0, 0, 1);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
+        private static TimeSpan spawnrate = new TimeSpan(0, 1, 0);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
         private static List<int> ErrorList = new List<int>() // Здесь заскриптованная последовательность ошибок
         {
-            //1, 2, 3, 2, 4, 1, // До хардмод
+            1, 2, 3, 2, 4, 1, // До хардмод
             5,  // Хардмод
         };
 
@@ -52,7 +52,7 @@ namespace Trojan_MVP_v1.Enemy
             { 2, new TimeSpan(0, 0, 30) },
             { 3, new TimeSpan(0, 1, 0) },
             { 4, new TimeSpan(0, 1, 0) },
-            { 5, new TimeSpan(0, 5, 0) },
+            { 5, new TimeSpan(0, 3, 0) },
             { 6, new TimeSpan(0, 1, 30) },
             { 7, new TimeSpan(0, 7, 0) },
             { 8, new TimeSpan(0, 0, 20) },
@@ -75,9 +75,15 @@ namespace Trojan_MVP_v1.Enemy
             }
             else    // Создаём новую ошибку
             {
-                ErrorCode = ErrorList[0];
+                if (ErrorList.Count > 0)
+                    ErrorCode = ErrorList[0];
+                else
+                {
+                    GameState.PlayerWin = true;
+                    UpdateSystem.NextScene();
+                }
 
-                _errorStart = DateTime.Now;
+                    _errorStart = DateTime.Now;
 
                 Error.Clear();
                 Error.Append("Критическая ошибка код: " + ErrorCode);

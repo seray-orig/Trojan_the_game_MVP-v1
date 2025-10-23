@@ -6,11 +6,13 @@ namespace Trojan_MVP_v1.Weapons
     internal static class Utility
     {
         public static int UtilityCode;
+        private static List<bool> UtilityHistory = new List<bool>(2) { false, false };
         private static string Title;
         private static DateTime _start;
         private static TimeSpan _end;
         private static bool idkHowElseToImplementThis = false;
         private static bool _canStart = false;
+        private static bool _errSolve = false;
 
         public static void Run()
         {
@@ -38,29 +40,26 @@ namespace Trojan_MVP_v1.Weapons
             }
             else
             {
-                _canStart = false;
-                idkHowElseToImplementThis = false;
                 if (ErrorFactory.ErrorCode == 5 && (UtilityCode == 3 || UtilityCode == 4))  // Говнакод пошёл (ну я хз как иначе) 23.10.2025 16:47
                 {
-                    if (_canStart && !GameState.UtilityHistory[0] && UtilityCode == 4)
+                    if (_canStart && !UtilityHistory[0] && UtilityCode == 4)
                     {
-                        GameState.UtilityHistory[0] = true;
+                        UtilityHistory[0] = true;
                     }
-                    if (GameState.UtilityHistory[0] && UtilityCode == 3)
+                    if (UtilityHistory[0] && UtilityCode == 3)
                     {
-                        if (GameState.UtilityHistory[1])
-                            GameState.UtilityHistory[2] = true;
-                        else
-                        {
-                            GameState.UtilityHistory[1] = true;
-                        }
+                        UtilityHistory[1] = true;
                     }
                 }
+
+                _canStart = false;
+                _errSolve = false;
+                idkHowElseToImplementThis = false;
                 GameState.IsUtilityRun = false;
                 GameState.CurrentUtility = null;
             }
 
-            if (_canStart) // Ошибки нет, либо не верная утилита
+            if (_canStart) // Если ошибки нет, либо не верная утилита
             {
                 GameState.CurrentUtilityText.Clear();
                 GameState.CurrentUtilityText.Append("Не обнаружено.");
@@ -68,30 +67,33 @@ namespace Trojan_MVP_v1.Weapons
             if (_canStart && ErrorFactory.ErrorCode == UtilityCode && GameState.IsErrorRun)
             {
                 ErrorFactory.ErrorSolve();
-                GameState.CurrentUtilityText.Clear();
-                GameState.CurrentUtilityText.Append("Исправлено.");
+                _errSolve = true;
             }
             if (ErrorFactory.ErrorCode == 5 && (UtilityCode == 3 || UtilityCode == 4))
             {
-                if (_canStart && !GameState.UtilityHistory[0] && UtilityCode == 4)
+                if (_canStart && !UtilityHistory[0] && UtilityCode == 4)
                 {
                     GameState.CurrentUtilityText.Clear();
                     GameState.CurrentUtilityText.Append("Обнаружена подозрительная активность.");
                 }
-                if (_canStart &&  GameState.UtilityHistory[0] == true && UtilityCode == 3)
+                if (_canStart &&  UtilityHistory[0] && !UtilityHistory[1] && UtilityCode == 3)
                 {
                     GameState.CurrentUtilityText.Clear();
                     GameState.CurrentUtilityText.Append("Обнаружена подозрительная активность.");
                 }
-                if (_canStart && GameState.UtilityHistory[0] == true && GameState.UtilityHistory[1] && GameState.UtilityHistory[2])
+                if (_canStart && UtilityHistory[0] && UtilityHistory[1] && UtilityCode == 3)
                 {
-                    for (int i = 0; i < 3; i++)
-                        GameState.UtilityHistory[i] = false;
+                    for (int i = 0; i < 2; i++)
+                        UtilityHistory[i] = false;
 
                     ErrorFactory.ErrorSolve();
-                    GameState.CurrentUtilityText.Clear();
-                    GameState.CurrentUtilityText.Append("Исправлено.");
+                    _errSolve = true;
                 }
+            }
+            if (_errSolve)
+            {
+                GameState.CurrentUtilityText.Clear();
+                GameState.CurrentUtilityText.Append("Исправлено.");
             }
         }
     }

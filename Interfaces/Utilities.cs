@@ -19,11 +19,16 @@ namespace Trojan_MVP_v1.Interfaces
 
         public static List<string> Text = new List<string>()
         {
-            "A - Утилита 1,",
-            "S - Утилита 2,",
-            "D - Утилита 3,",
-            "F - Утилита 4,",
-
+            "Нажать:",
+            "",
+            "1 - Утилита 1,",
+            "",
+            "2 - Утилита 2,",
+            "",
+            "3 - Утилита 3,",
+            "",
+            "4 - Утилита 4,",
+            "",
         };
 
         public static void HotKeys(ConsoleKey key)
@@ -33,7 +38,7 @@ namespace Trojan_MVP_v1.Interfaces
                 case ConsoleKey.Q:
                     UpdateSystem.SetInterface("Basic");
                     break;
-                case ConsoleKey.A:
+                case ConsoleKey.D1:
                     UpdateSystem.SetInterface("Basic");
                     if (!GameState.IsUtilityRun)
                     {
@@ -41,7 +46,7 @@ namespace Trojan_MVP_v1.Interfaces
                         GameState.CurrentUtility = Utility.Run;
                     }
                     break;
-                case ConsoleKey.S:
+                case ConsoleKey.D2:
                     UpdateSystem.SetInterface("Basic");
                     if (!GameState.IsUtilityRun)
                     {
@@ -49,7 +54,7 @@ namespace Trojan_MVP_v1.Interfaces
                         GameState.CurrentUtility = Utility.Run;
                     }
                     break;
-                case ConsoleKey.D:
+                case ConsoleKey.D3:
                     UpdateSystem.SetInterface("Basic");
                     if (!GameState.IsUtilityRun)
                     {
@@ -57,7 +62,7 @@ namespace Trojan_MVP_v1.Interfaces
                         GameState.CurrentUtility = Utility.Run;
                     }
                     break;
-                case ConsoleKey.F:
+                case ConsoleKey.D4:
                     UpdateSystem.SetInterface("Basic");
                     if (!GameState.IsUtilityRun)
                     {
