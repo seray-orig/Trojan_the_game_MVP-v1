@@ -11,7 +11,6 @@ namespace Trojan_MVP_v1.Weapons
         private static TimeSpan _end;
         private static bool idkHowElseToImplementThis = false;
         private static bool _canStart = false;
-        private static bool _solve = false;
 
         public static void Run()
         {
@@ -40,27 +39,59 @@ namespace Trojan_MVP_v1.Weapons
             else
             {
                 _canStart = false;
-                _solve = false;
                 idkHowElseToImplementThis = false;
+                if (ErrorFactory.ErrorCode == 5 && (UtilityCode == 3 || UtilityCode == 4))  // Говнакод пошёл (ну я хз как иначе) 23.10.2025 16:47
+                {
+                    if (_canStart && !GameState.UtilityHistory[0] && UtilityCode == 4)
+                    {
+                        GameState.UtilityHistory[0] = true;
+                    }
+                    if (GameState.UtilityHistory[0] && UtilityCode == 3)
+                    {
+                        if (GameState.UtilityHistory[1])
+                            GameState.UtilityHistory[2] = true;
+                        else
+                        {
+                            GameState.UtilityHistory[1] = true;
+                        }
+                    }
+                }
                 GameState.IsUtilityRun = false;
                 GameState.CurrentUtility = null;
             }
 
-            if (_solve || (_canStart && ErrorFactory.ErrorCode == UtilityCode && GameState.IsErrorRun))
-            {
-                if (!_solve)
-                {
-                    ErrorFactory.ErrorSolve();
-                }
-
-                GameState.CurrentUtilityText.Clear();
-                GameState.CurrentUtilityText.Append("Исправлено.");
-                _solve = true;
-            }
-            else if (_canStart)
+            if (_canStart) // Ошибки нет, либо не верная утилита
             {
                 GameState.CurrentUtilityText.Clear();
                 GameState.CurrentUtilityText.Append("Не обнаружено.");
+            }
+            if (_canStart && ErrorFactory.ErrorCode == UtilityCode && GameState.IsErrorRun)
+            {
+                ErrorFactory.ErrorSolve();
+                GameState.CurrentUtilityText.Clear();
+                GameState.CurrentUtilityText.Append("Исправлено.");
+            }
+            if (ErrorFactory.ErrorCode == 5 && (UtilityCode == 3 || UtilityCode == 4))
+            {
+                if (_canStart && !GameState.UtilityHistory[0] && UtilityCode == 4)
+                {
+                    GameState.CurrentUtilityText.Clear();
+                    GameState.CurrentUtilityText.Append("Обнаружена подозрительная активность.");
+                }
+                if (_canStart &&  GameState.UtilityHistory[0] == true && UtilityCode == 3)
+                {
+                    GameState.CurrentUtilityText.Clear();
+                    GameState.CurrentUtilityText.Append("Обнаружена подозрительная активность.");
+                }
+                if (_canStart && GameState.UtilityHistory[0] == true && GameState.UtilityHistory[1] && GameState.UtilityHistory[2])
+                {
+                    for (int i = 0; i < 3; i++)
+                        GameState.UtilityHistory[i] = false;
+
+                    ErrorFactory.ErrorSolve();
+                    GameState.CurrentUtilityText.Clear();
+                    GameState.CurrentUtilityText.Append("Исправлено.");
+                }
             }
         }
     }

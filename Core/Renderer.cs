@@ -87,7 +87,7 @@ namespace Trojan_MVP_v1.Core
         {
             CompleteTheString();
             GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
-            GameState.PlayerScreen.Append("Проблем было исправлено сегодня: " + GameState.ErrorsWereSolved);
+            GameState.PlayerScreen.Append("Проблем исправлено сегодня: " + GameState.ErrorsWereSolved);
             CompleteTheString();
 
             GameState.PlayerScreen.Append(_debugInternalSymbol, (GameState.ConsoleHeight / 2 - 

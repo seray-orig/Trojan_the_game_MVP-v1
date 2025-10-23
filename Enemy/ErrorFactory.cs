@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using Trojan_MVP_v1.Core;
 
 namespace Trojan_MVP_v1.Enemy
@@ -13,10 +12,11 @@ namespace Trojan_MVP_v1.Enemy
         public static StringBuilder ErrorTime = new StringBuilder();
 
         public static int ErrorCode = 0;
-        private static TimeSpan spawnrate = new TimeSpan(0, 1, 0);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
+        private static TimeSpan spawnrate = new TimeSpan(0, 0, 1);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
         private static List<int> ErrorList = new List<int>() // Здесь заскриптованная последовательность ошибок
         {
-            1, 2, 3, 2, 4, 1, 5
+            //1, 2, 3, 2, 4, 1, // До хардмод
+            5,  // Хардмод
         };
 
         private static void ErrorLogic()
@@ -52,7 +52,7 @@ namespace Trojan_MVP_v1.Enemy
             { 2, new TimeSpan(0, 0, 30) },
             { 3, new TimeSpan(0, 1, 0) },
             { 4, new TimeSpan(0, 1, 0) },
-            { 5, new TimeSpan(0, 2, 0) },
+            { 5, new TimeSpan(0, 5, 0) },
             { 6, new TimeSpan(0, 1, 30) },
             { 7, new TimeSpan(0, 7, 0) },
             { 8, new TimeSpan(0, 0, 20) },
