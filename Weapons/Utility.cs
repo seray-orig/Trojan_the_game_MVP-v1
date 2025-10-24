@@ -51,6 +51,17 @@ namespace Trojan_MVP_v1.Weapons
                         UtilityHistory[1] = true;
                     }
                 }
+                if (ErrorFactory.ErrorCode == 6 && (UtilityCode == 2 || UtilityCode == 1))
+                {
+                    if (_canStart && !UtilityHistory[0] && UtilityCode == 2)
+                    {
+                        UtilityHistory[0] = true;
+                    }
+                    if (UtilityHistory[0] && UtilityCode == 1)
+                    {
+                        UtilityHistory[1] = true;
+                    }
+                }
 
                 _canStart = false;
                 _errSolve = false;
@@ -82,6 +93,27 @@ namespace Trojan_MVP_v1.Weapons
                     GameState.CurrentUtilityText.Append("Обнаружена подозрительная активность.");
                 }
                 if (_canStart && UtilityHistory[0] && UtilityHistory[1] && UtilityCode == 3)
+                {
+                    for (int i = 0; i < 2; i++)
+                        UtilityHistory[i] = false;
+
+                    ErrorFactory.ErrorSolve();
+                    _errSolve = true;
+                }
+            }
+            if (ErrorFactory.ErrorCode == 6 && (UtilityCode == 2 || UtilityCode == 1))
+            {
+                if (_canStart && !UtilityHistory[0] && UtilityCode == 2)
+                {
+                    GameState.CurrentUtilityText.Clear();
+                    GameState.CurrentUtilityText.Append("Обнаружена подозрительная активность.");
+                }
+                if (_canStart && UtilityHistory[0] && !UtilityHistory[1] && UtilityCode == 1)
+                {
+                    GameState.CurrentUtilityText.Clear();
+                    GameState.CurrentUtilityText.Append("Обнаружена подозрительная активность.");
+                }
+                if (_canStart && UtilityHistory[0] && UtilityHistory[1] && UtilityCode == 1)
                 {
                     for (int i = 0; i < 2; i++)
                         UtilityHistory[i] = false;

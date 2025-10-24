@@ -49,7 +49,7 @@ namespace Trojan_MVP_v1.Core
 
         private static List<string> SceneOrder = new List<string>
         {
-            "Welcome",
+            //"Welcome",
             "Workplace",
             "GameOver"
         };

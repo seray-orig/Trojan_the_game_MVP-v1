@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Trojan_MVP_v1.Core;
+﻿using Trojan_MVP_v1.Core;
+using Trojan_MVP_v1.Enemy;
 
 namespace Trojan_MVP_v1.Interfaces
 {
@@ -26,6 +21,15 @@ namespace Trojan_MVP_v1.Interfaces
                     if (!Text.Contains("U - Выбрать утилиту"))
                         Text.Add("U - Выбрать утилиту");
                     UpdateSystem.SetInterface("Utilities");
+                    break;
+                case ConsoleKey.Spacebar:
+                    if (GameState.IsErrorRun && ErrorFactory.ErrorCode == 8 && GameState.err8Clicks >= 29)
+                    {
+                        GameState.err8Clicks = 0;
+                        ErrorFactory.ErrorSolve();
+                    }
+                    else if (ErrorFactory.ErrorCode == 8 && GameState.err8Clicks < 30)
+                        GameState.err8Clicks++;
                     break;
             }
         }

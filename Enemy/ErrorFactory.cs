@@ -7,16 +7,17 @@ namespace Trojan_MVP_v1.Enemy
     {
         private static DateTime _start = DateTime.Now;  // Хрень начала отсчёта, что бы вычислить _end
         private static TimeSpan _end;                   // Хрень что бы вычислить больше ли она spawnrate
-        private static DateTime _errorStart;    // Обратный отсчёт на решение ошибки, не успел - бан
+        public static DateTime _errorStart;    // Обратный отсчёт на решение ошибки, не успел - бан
         public static StringBuilder Error = new StringBuilder();
         public static StringBuilder ErrorTime = new StringBuilder();
 
         public static int ErrorCode = 0;
-        private static TimeSpan spawnrate = new TimeSpan(0, 1, 0);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
+        private static TimeSpan spawnrate = new TimeSpan(0, 0, 0);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
         private static List<int> ErrorList = new List<int>() // Здесь заскриптованная последовательность ошибок
         {
-            1, 2, 3, 2, 4, 1, // До хардмод
-            5,  // Хардмод
+            //1, 2, 3, 2, 4, 1, // До хардмод
+            //5, 6, 2,
+            8, 3, 7, 6, 9, 10  // Хардмод
         };
 
         private static void ErrorLogic()
@@ -88,6 +89,9 @@ namespace Trojan_MVP_v1.Enemy
                 Error.Clear();
                 Error.Append("Критическая ошибка код: " + ErrorCode);
             }
+
+            if (GameState.IsErrorRun && ErrorCode == 8)
+                ErrorTime.Append(" Жми пробел! " + (30 - GameState.err8Clicks));
         }
 
         public static void ErrorSolve()

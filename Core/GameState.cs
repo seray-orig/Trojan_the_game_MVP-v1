@@ -18,6 +18,7 @@ namespace Trojan_MVP_v1.Core
 
         public static bool IsErrorRun = false;
         public static int ErrorsWereSolved = 0;
+        public static int err8Clicks = 0;
 
         public static bool PlayerWin = false;
 
