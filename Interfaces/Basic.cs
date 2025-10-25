@@ -21,6 +21,12 @@ namespace Trojan_MVP_v1.Interfaces
                     if (!Text.Contains("U - Выбрать утилиту"))
                         Text.Add("U - Выбрать утилиту");
                     UpdateSystem.SetInterface("Utilities");
+
+                    if (ErrorFactory.ErrorCode == 10 && !Utilities.Text.Contains("5 - Игра \"Змейка\""))
+                    {
+                        Utilities.Text.Add("5 - Игра \"Змейка\"");
+                        Utilities.Text.Add("");
+                    }
                     break;
                 case ConsoleKey.Spacebar:
                     if (GameState.IsErrorRun && ErrorFactory.ErrorCode == 8 && GameState.err8Clicks >= 29)

@@ -13,6 +13,7 @@ namespace Trojan_MVP_v1.Weapons
         private static bool idkHowElseToImplementThis = false;
         private static bool _canStart = false;
         private static bool _errSolve = false;
+        private static bool err10 = false;
 
         public static void Run()
         {
@@ -121,6 +122,25 @@ namespace Trojan_MVP_v1.Weapons
                     ErrorFactory.ErrorSolve();
                     _errSolve = true;
                 }
+            }
+            if (UtilityCode != 5)
+                err10 = false;
+            if (err10 || ErrorFactory.ErrorCode == 10 && UtilityCode == 5)
+            {
+                GameState.CurrentUtilityTitle.Clear();
+                GameState.CurrentUtilityTitle.Append("Змейка");
+                GameState.CurrentUtilityText.Clear();
+                GameState.CurrentUtilityText.Append("Змейка съела нолик");
+                ErrorFactory.ErrorCode = 1;
+                ErrorFactory._errorStart = DateTime.Now;
+                err10 = true;
+            }
+            else if (ErrorFactory.ErrorCode != 10 && UtilityCode == 5)
+            {
+                GameState.CurrentUtilityTitle.Clear();
+                GameState.CurrentUtilityTitle.Append("Змейка");
+                GameState.CurrentUtilityText.Clear();
+                GameState.CurrentUtilityText.Append("Игра не работает");
             }
             if (_errSolve)
             {

@@ -70,6 +70,22 @@ namespace Trojan_MVP_v1.Interfaces
                         GameState.CurrentUtility = Utility.Run;
                     }
                     break;
+                case ConsoleKey.D5:
+                    if (!Text.Contains("5 - Игра \"Змейка\""))
+                    {
+                        Text.Add("5 - Игра \"Змейка\"");
+                        Text.Add("");
+                    }
+                    else
+                    {
+                        UpdateSystem.SetInterface("Basic");
+                        if (!GameState.IsUtilityRun)
+                        {
+                            Utility.UtilityCode = 5;
+                            GameState.CurrentUtility = Utility.Run;
+                        }
+                    }
+                    break;
             }
         }
     }
