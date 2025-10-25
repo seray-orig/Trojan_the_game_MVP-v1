@@ -26,5 +26,9 @@ namespace Trojan_MVP_v1.Core
         public static StringBuilder CurrentUtilityTitle = new StringBuilder();
         public static StringBuilder CurrentUtilityText = new StringBuilder(cmdPixels/2);
         public static bool          IsUtilityRun = false;
+
+        public static bool  canEmail = false;
+        public static int   emailState = 0;
+        public static DateTime _emailStart;
     }
 }

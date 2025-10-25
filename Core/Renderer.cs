@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Design;
 using System.Globalization;
 using System.Text;
+using Trojan_MVP_v1.Interfaces;
 
 namespace Trojan_MVP_v1.Core
 {
@@ -131,6 +132,101 @@ namespace Trojan_MVP_v1.Core
                 GameState.PlayerScreen.Length / GameState.ConsoleWidth) / 2 ) * GameState.ConsoleWidth);
             GameState.PlayerScreen.Append(_debugInternalSymbol, GameState.ConsoleWidth / 2 - GameState.CurrentUtilityText.Length / 2);
             GameState.PlayerScreen.Append(GameState.CurrentUtilityText);
+        }
+
+        public static void BuildEmail(string Title, List<string> EngiText, List<string> UrText)
+        {
+            GameState.PlayerScreen.Clear();
+            CompleteTheString();
+            GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+            GameState.PlayerScreen.Append(Title);
+            CompleteTheString();
+            GameState.PlayerScreen.Append(new string('_', GameState.ConsoleWidth));
+            CompleteTheString();
+
+            if (GameState.emailState >= 0)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[0]);
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[1]);
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[2]);
+                CompleteTheString();
+            }
+            if (GameState.emailState >= 1)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, GameState.ConsoleWidth - 10 - UrText[0].Length);
+                GameState.PlayerScreen.Append(UrText[0]);
+                CompleteTheString();
+            }
+            if (GameState.emailState >= 2)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[3]);
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[4]);
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[5]);
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[6]);
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[7]);
+                CompleteTheString();
+            }
+            if (GameState.emailState >= 3)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, GameState.ConsoleWidth - 10 - UrText[1].Length);
+                GameState.PlayerScreen.Append(UrText[1]);
+                CompleteTheString();
+            }
+            if (GameState.emailState >= 4)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[8]);
+                CompleteTheString();
+            }
+            if (GameState.emailState >= 5)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[9]);
+                CompleteTheString();
+            }
+            if (GameState.emailState >= 6)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, GameState.ConsoleWidth - 10 - UrText[2].Length);
+                GameState.PlayerScreen.Append(UrText[2]);
+                CompleteTheString();
+            }
+            if (GameState.emailState >= 7)
+            {
+                CompleteTheString();
+                GameState.PlayerScreen.Append(_debugInternalSymbol, 3);
+                GameState.PlayerScreen.Append(EngiText[10]);
+                CompleteTheString();
+            }
+
+            if (Email.showEnterButton)
+            {
+                GameState.PlayerScreen.Append(_debugInternalSymbol, GameState.ConsoleHeight * GameState.ConsoleWidth -
+                    GameState.PlayerScreen.Length - GameState.ConsoleWidth * 3);
+                GameState.PlayerScreen.Append(_debugInternalSymbol, GameState.ConsoleWidth - 10 - "Enter".Length);
+                GameState.PlayerScreen.Append("Enter");
+                CompleteTheString();
+            }
         }
 
         // Завершает строку пустотой

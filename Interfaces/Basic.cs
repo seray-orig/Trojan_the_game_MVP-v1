@@ -28,8 +28,16 @@ namespace Trojan_MVP_v1.Interfaces
                         GameState.err8Clicks = 0;
                         ErrorFactory.ErrorSolve();
                     }
-                    else if (ErrorFactory.ErrorCode == 8 && GameState.err8Clicks < 30)
+                    else if (GameState.IsErrorRun && ErrorFactory.ErrorCode == 8 && GameState.err8Clicks < 30)
                         GameState.err8Clicks++;
+                    break;
+                case ConsoleKey.P:
+                    if (GameState.canEmail)
+                    {
+                        if (Text.Contains("P - Открыть почтовый ящик*"))
+                            Text[2] = ("P - Открыть почтовый ящик");
+                        UpdateSystem.SetInterface("Email");
+                    }
                     break;
             }
         }

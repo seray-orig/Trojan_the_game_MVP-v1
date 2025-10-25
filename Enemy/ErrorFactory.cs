@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Trojan_MVP_v1.Core;
+using Trojan_MVP_v1.Interfaces;
 
 namespace Trojan_MVP_v1.Enemy
 {
@@ -12,12 +13,12 @@ namespace Trojan_MVP_v1.Enemy
         public static StringBuilder ErrorTime = new StringBuilder();
 
         public static int ErrorCode = 0;
-        private static TimeSpan spawnrate = new TimeSpan(0, 0, 0);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
+        private static TimeSpan spawnrate = new TimeSpan(0, 1, 0);  // Первая ошибка появится спустя минуту, для всех остальных значение изменится
         private static List<int> ErrorList = new List<int>() // Здесь заскриптованная последовательность ошибок
         {
             //1, 2, 3, 2, 4, 1, // До хардмод
-            //5, 6, 2,
-            8, 3, 7, 6, 9, 10  // Хардмод
+            //5, 6, 2, 8, 3, 7, 6,
+            9, 10  // Хардмод
         };
 
         private static void ErrorLogic()
@@ -39,6 +40,12 @@ namespace Trojan_MVP_v1.Enemy
                 spawnrate = new TimeSpan(0, 0, 25);
                 _start = DateTime.Now;
             }
+
+            if (GameState.IsErrorRun && ErrorCode == 7 && !GameState.canEmail && (DateTime.Now - _errorStart) >= new TimeSpan(0, 1, 30)) // Тут добавляется почтовый ящик
+            {
+                Basic.Text.Add("P - Открыть почтовый ящик*");
+                GameState.canEmail = true;
+            }
         }
 
         public static void CheckError()
@@ -55,7 +62,7 @@ namespace Trojan_MVP_v1.Enemy
             { 4, new TimeSpan(0, 1, 0) },
             { 5, new TimeSpan(0, 3, 0) },
             { 6, new TimeSpan(0, 1, 30) },
-            { 7, new TimeSpan(0, 7, 0) },
+            { 7, new TimeSpan(0, 3, 30) },
             { 8, new TimeSpan(0, 0, 20) },
             { 9, new TimeSpan(0, 2, 30) },
             { 10, new TimeSpan(0, 10, 0) },

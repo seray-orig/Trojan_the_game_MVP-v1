@@ -97,6 +97,14 @@ namespace Trojan_MVP_v1.Core
                     InputHandler.CurrentKeyHandler = Utilities.HotKeys;
                 }
             },
+            {
+                "Email",
+                () =>
+                {
+                    Renderer.BuildEmail(Email.Title, Email.EngiText, Email.UrText);
+                    InputHandler.CurrentKeyHandler = Email.HotKeys;
+                }
+            },
         };
 
         private static StringBuilder CurrentInterface = new StringBuilder("Basic");
@@ -135,6 +143,45 @@ namespace Trojan_MVP_v1.Core
                 GameState.CurrentUtility.Invoke();
             if (CurrentInterface.ToString() == "Basic" && GameState.IsUtilityRun)
                 Renderer.BuildUtility();
+
+            // Логика почтового ящика и 7-й ошибки
+            if (Email.showEnterButton)
+            {
+                GameState._emailStart = DateTime.Now;
+            }
+            else
+            {
+                if (DateTime.Now - GameState._emailStart >= new TimeSpan(0, 0, 15))
+                {
+                    if (GameState.emailState == 3)
+                    {
+                        Basic.Text[2] = ("P - Открыть почтовый ящик*");
+                        GameState._emailStart = DateTime.Now;
+                        GameState.emailState++;
+                    }
+                    else if (GameState.emailState == 5)
+                    {
+                        Basic.Text[2] = ("P - Открыть почтовый ящик*");
+                        GameState._emailStart = DateTime.Now;
+                        GameState.emailState++;
+                    }
+                    else if (GameState.emailState >= 6)
+                    {
+                        if (GameState.emailState == 6)
+                            Basic.Text[2] = ("P - Открыть почтовый ящик*");
+                        GameState.emailState = 7;
+                        GameState._emailStart = DateTime.Now;
+                    }
+                    else
+                    {
+                        Basic.Text[2] = ("P - Открыть почтовый ящик*");
+                        Email.showEnterButton = true;
+                        GameState.emailState++;
+                        if (GameState.emailState == 5)
+                            ErrorFactory.ErrorSolve();
+                    }
+                }
+            }
         }
     }
 }
