@@ -63,7 +63,7 @@ namespace Trojan_MVP_v1.Enemy
             { 4, new TimeSpan(0, 1, 0) },
             { 5, new TimeSpan(0, 3, 0) },
             { 6, new TimeSpan(0, 1, 30) },
-            { 7, new TimeSpan(0, 3, 30) },
+            { 7, new TimeSpan(0, 3, 10) },
             { 8, new TimeSpan(0, 0, 20) },
             { 9, new TimeSpan(0, 2, 30) },
             { 10, new TimeSpan(0, 10, 0) },

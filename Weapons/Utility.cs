@@ -14,6 +14,7 @@ namespace Trojan_MVP_v1.Weapons
         private static bool _canStart = false;
         private static bool _errSolve = false;
         private static bool err10 = false;
+        private static bool err10_2 = true;
 
         public static void Run()
         {
@@ -132,7 +133,11 @@ namespace Trojan_MVP_v1.Weapons
                 GameState.CurrentUtilityText.Clear();
                 GameState.CurrentUtilityText.Append("Змейка съела нолик");
                 ErrorFactory.ErrorCode = 1;
-                ErrorFactory._errorStart = DateTime.Now;
+                if (err10_2)
+                {
+                    ErrorFactory._errorStart = DateTime.Now;
+                    err10_2 = false;
+                }
                 err10 = true;
             }
             else if (ErrorFactory.ErrorCode != 10 && UtilityCode == 5)
