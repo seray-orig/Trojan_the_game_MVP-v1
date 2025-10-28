@@ -38,7 +38,7 @@ namespace Trojan_MVP_v1.Enemy
             {
                 ErrorRun();
                 GameState.IsErrorRun = true;
-                spawnrate = new TimeSpan(0, 0, 25);
+                spawnrate = new TimeSpan(0, 0, 20);
                 _start = DateTime.Now;
             }
 

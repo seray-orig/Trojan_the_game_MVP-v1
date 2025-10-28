@@ -5,6 +5,26 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RepositoryUrl>https://github.com/seray-orig/Trojan_the_game_MVP-v1</RepositoryUrl>
+    <Authors>seray</Authors>
+    <Company>Шашлык play</Company>
+    <Product>Trojan the game (MVP) v1</Product>
+    <Description>Прототип игровго процесса игры Trojan</Description>
+    <PackageIcon>Trojan_ico.png</PackageIcon>
+    <Version>1.0.1</Version>
+    <ApplicationIcon>Trojan_ico.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Trojan_ico.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Trojan_ico.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
